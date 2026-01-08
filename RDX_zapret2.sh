@@ -647,12 +647,11 @@ show_menu() {
 
       echo ""
       echo "3. Проверить обновление"
-      echo -e "${YELLOW}5. Принудительно переустановить${NC}"
-      echo -e "${RED}6. Полностью удалить zapret2${NC}"
+      echo -e "${RED}7. Полностью удалить zapret2${NC}"
       echo ""
-      echo -e "${GREEN}0. Выйти${NC} (или Enter)"
+      echo -e "${GREEN}9. Выйти${NC} (или Enter)"
       echo ""
-      echo -n "Выберите опцию [1,3,5,6,0]: "
+      echo -n "Выберите опцию [1,3,7,9]: "
       read choice
 
       case "$choice" in
@@ -666,13 +665,10 @@ show_menu() {
         3)
           update_zapret
           ;;
-        5)
-          install_zapret "true"
-          ;;
-        6)
+        7)
           full_uninstall_zapret
           ;;
-        0|"")
+        9|"")
           echo ""
           print_info "Выход..."
           echo ""
