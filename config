@@ -82,7 +82,6 @@ NFQWS2_UDP_PKT_IN=3
 # <HOSTLIST_NOAUTO> appends ipset/zapret-hosts-auto.txt as normal list
 #--debug=@/tmp/zapret2-debug.log
 NFQWS2_OPT="
---debug=@/tmp/zapret2-debug.log
 --filter-tcp=80
 --hostlist=/data/zapret2/ipset/zapret-hosts-user.txt
 --lua-desync=fakedsplit:pos=method2:tcpmd5:ip_autottl=-2,3-20
