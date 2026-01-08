@@ -1,6 +1,7 @@
 #!/bin/sh
 # rdX Zapret2 Installer
 # for Rooted Dumb Xiaomi routers
+VERSION="v0.1"
 
 ##############################################################################
 # КОНФИГ
@@ -53,13 +54,21 @@ done
 # ЛОГГЕР
 ##############################################################################
 print_header() {
+  local version="$VERSION"
+  local title_len=35  # Максимальная длина внутри ║ ... ║
+  local title="rdX Zapret2 Installer ${version}"
+  local title_length=${#title}
+  local spaces=$((title_len - title_length))
+  local padding=$(printf '%*s' "$spaces" "")
+
   echo ""
   echo -e "${CYAN}╔══════════════════════════════════════════╗${NC}"
-  echo -e "${CYAN}║ rdX Zapret2 Installer                    ║${NC}"
+  echo -e "${CYAN}║${title}${padding}║${NC}"
   echo -e "${CYAN}║ for Rooted Dumb Xiaomi routers           ║${NC}"
   echo -e "${CYAN}╚══════════════════════════════════════════╝${NC}"
   echo ""
 }
+
 
 print_success() { echo -e "${GREEN}[✓]${NC} $1"; }
 print_error()   { echo -e "${RED}[✗]${NC} $1"; }
