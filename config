@@ -2,7 +2,7 @@
 # change values here
 
 # can help in case /tmp has not enough space
-#TMPDIR=/opt/zapret2/tmp
+#TMPDIR=/data/zapret2/tmp
 
 # redefine user for zapret daemons. required on Keenetic
 #WS_USER=nobody
@@ -82,6 +82,7 @@ NFQWS2_UDP_PKT_IN=3
 # <HOSTLIST_NOAUTO> appends ipset/zapret-hosts-auto.txt as normal list
 #--debug=@/tmp/zapret2-debug.log
 NFQWS2_OPT="
+--debug=@/tmp/zapret2-debug.log
 --lua-init=/data/zapret2/lua/zapret-antidpi.lua
 --filter-tcp=80
 --hostlist=/data/zapret2/ipset/zapret-hosts-user.txt
@@ -97,7 +98,7 @@ NFQWS2_OPT="
 --new
 --filter-udp=443
 --hostlist=/data/zapret2/ipset/zapret-hosts-user.txt
---lua-desync=fake:blob=/data2/zapret/files/fake/quic_initial_www_google_com.bin:repeats=6
+--lua-desync=fake:blob=/data/zapret/files/fake/quic_initial_www_google_com.bin:repeats=6
 --new
 --filter-udp=443,590-1400,3478-3481,5349,19294-19344
 --filter-l7=stun
