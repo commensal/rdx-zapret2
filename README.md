@@ -4,8 +4,11 @@
 [![GitHub forks](https://img.shields.io/github/forks/commensal/rdx-zapret2?style=social)](https://github.com/commensal/rdx-zapret2)
 
 
-# ⛔⛔️⛔️ НЕ ИСПОЛЬЗОВАТЬ - ИДУТ РАБОТЫ ⛔️⛔️⛔️
-**[ИСПОЛЬЗУЙТЕ ПЕРВУЮ ВЕРСИЮ](https://github.com/commensal/rdx-zapret)"**
+# ⛔⛔️⛔️ НЕ ИСПОЛЬЗОВАТЬ  ⛔️⛔️⛔️
+# ⛔⛔️⛔️   ИДУТ РАБОТЫ    ⛔️⛔️⛔️
+# ⛔⛔️⛔️ РЕПО для ТЕСТА   ⛔️⛔️⛔️
+
+**[ИСПОЛЬЗУЙТЕ ПЕРВУЮ ВЕРСИЮ Zapret](https://github.com/commensal/rdx-zapret)**
 
 **Установщик оригинального [bol-van/zapret2](https://github.com/bol-van/zapret2) для рутованных "Dumb" роутеров Xiaomi rdX.**
 
