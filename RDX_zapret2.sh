@@ -447,30 +447,28 @@ install_zapret_core() {
         print_info "Замена путей /opt/ -> /data/ в файлах zapret2..."
         find "$INSTALL_PATH" -type f -exec sed -i 's|/opt/|/data/|g' {} \; 2>/dev/null
 
-        # Отключаем вопрос о типе файрвола в install_easy.sh
-        print_info "Отключение интерактивного выбора файрвола..."
+        # === rdx-zapret2 PATCh для install_easy.sh ===
+        print_info "Применение патча rdx-zapret2 к install_easy.sh..."
         if [ -f "$actual_path/install_easy.sh" ]; then
-          sed -i '/select firewall type/i\
-FWTYPE="iptables"
-echo "FWTYPE установлен: iptables (авто)"' "$actual_path/install_easy.sh" 2>/dev/null || true
-          print_success "install_easy.sh модифицирован (FWTYPE=iptables по умолчанию)"
+          # Устанавливаем/обновляем обязательные переменные
+          sed -i 's/^MODE_FILTER=.*/MODE_FILTER="hostlist"/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'MODE_FILTER="hostlist"' >> "$actual_path/install_easy.sh"
+          sed -i 's/^GETLIST=.*/GETLIST="get_user.sh"/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'GETLIST="get_user.sh"' >> "$actual_path/install_easy.sh"
+          sed -i 's/^NFQWS2_ENABLE=.*/NFQWS2_ENABLE="1"/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'NFQWS2_ENABLE="1"' >> "$actual_path/install_easy.sh"
+          sed -i 's/^FLOWOFFLOAD=.*/FLOWOFFLOAD="none"/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'FLOWOFFLOAD="none"' >> "$actual_path/install_easy.sh"
+          sed -i 's/^TMPDIR=.*/TMPDIR=""/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'TMPDIR=""' >> "$actual_path/install_easy.sh"
+          sed -i 's/^MODE_IPV6=.*/MODE_IPV6=""/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'MODE_IPV6=""' >> "$actual_path/install_easy.sh"
+          sed -i 's/^FWTYPE=.*/FWTYPE="iptables"/' "$actual_path/install_easy.sh" 2>/dev/null || echo 'FWTYPE="iptables"' >> "$actual_path/install_easy.sh"
+
+          # Закомментируем интерактивные функции в install_openwrt()
+          sed -i 's/^  select_fwtype/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+          sed -i 's/^  select_ipv6/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+          sed -i 's/^  check_prerequisites_openwrt/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+          sed -i 's/^  ask_config/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+          sed -i 's/^  ask_config_tmpdir/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+          sed -i 's/^  ask_config_offload/#&/' "$actual_path/install_easy.sh" 2>/dev/null
+
+          print_success "Патч rdx-zapret2 применён к install_easy.sh"
         fi
-
-        # === rdx-zapret2 AUTO-CONFIG для OpenWRT ===
-        print_info "Настройка автоматической конфигурации OpenWRT..."
-        cat >> "$actual_path/config" << 'EOF'
-
-# Авто-конфигурация rdx-zapret2 OpenWRT
-MODE_FILTER="hostlist"
-GETLIST="get_user.sh"
-NFQWS2_ENABLE="1"
-FLOWOFFLOAD="none"
-TMPDIR=""
-MODE_IPV6=""
-FWTYPE="iptables"
-EOF
-        
-        print_success "Авто-конфиг добавлен в $actual_path/config"
       fi
 
       if [ "$TEST_MODE" = "true" ]; then
