@@ -39,7 +39,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/commensal/rdx-zapret2/main
 **Все файлы в `/data/zapret2/` (НЕ `/opt/zapret2`!):**
 
 ### Основные файлы
-- `/data/zapret2/config` — параметры nfqws/tpws/mode
+- `/data/zapret2/config` — параметры NFQWS2_OPT=
 - `/data/zapret2/ipset/zapret-hosts-user.txt` — список user доменов
 - `/data/zapret2/ipset/zapret-hosts-google.txt` — список google доменов
 
