@@ -83,7 +83,6 @@ NFQWS2_UDP_PKT_IN=3
 #--debug=@/tmp/zapret2-debug.log
 NFQWS2_OPT="
 --debug=@/tmp/zapret2-debug.log
---lua-init=/data/zapret2/lua/zapret-antidpi.lua
 --filter-tcp=80
 --hostlist=/data/zapret2/ipset/zapret-hosts-user.txt
 --lua-desync=fakedsplit:pos=method2:tcpmd5:ip_autottl=-2,3-20
