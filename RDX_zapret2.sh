@@ -55,8 +55,8 @@ done
 ##############################################################################
 print_header() {
   local version="$VERSION"
-  local title_len=35  # Максимальная длина внутри ║ ... ║
-  local title="rdX Zapret2 Installer ${version}"
+  local title_len=20  # Максимальная длина внутри ║ ... ║
+  local title=" rdX Zapret2 Installer ${version}"
   local title_length=${#title}
   local spaces=$((title_len - title_length))
   local padding=$(printf '%*s' "$spaces" "")
