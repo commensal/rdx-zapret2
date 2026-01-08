@@ -446,6 +446,22 @@ install_zapret_core() {
       if [ "$TEST_MODE" = "false" ]; then
         print_info "Замена путей /opt/ -> /data/ в файлах zapret2..."
         find "$INSTALL_PATH" -type f -exec sed -i 's|/opt/|/data/|g' {} \; 2>/dev/null
+
+        # === rdx-zapret2 AUTO-CONFIG для OpenWRT ===
+        print_info "Настройка автоматической конфигурации OpenWRT..."
+        cat >> "$actual_path/config" << 'EOF'
+
+# Авто-конфигурация rdx-zapret2 OpenWRT
+MODE_FILTER="hostlist"
+GETLIST="get_user.sh"
+NFQWS2_ENABLE="1"
+FLOWOFFLOAD="none"
+TMPDIR=""
+MODE_IPV6=""
+FWTYPE="iptables"
+EOF
+        
+        print_success "Авто-конфиг добавлен в $actual_path/config"
       fi
 
       if [ "$TEST_MODE" = "true" ]; then
@@ -477,6 +493,7 @@ install_zapret_core() {
     print_error "Ошибка при скачивании архива Zapret2"
   fi
 }
+
 
 install_zapret() {
   local force_reinstall="$1"
