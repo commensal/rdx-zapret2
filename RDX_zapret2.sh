@@ -445,7 +445,7 @@ install_zapret_core() {
         # === rdx-zapret2 PATCh для install_easy.sh ===
         print_info "Применение патча rdx-zapret2 к install_easy.sh..."
         if [ -f "$actual_path/install_easy.sh" ]; then
-          # Находим install_openwrt() и комментируем следующие 6 строк
+          # Находим install_openwrt() и комментируем 6 строк
           awk '
           /install_openwrt\(\)/ {found=1; print; next}
           found && /select_fwtype/ {print "# " $0; next}
@@ -457,6 +457,14 @@ install_zapret_core() {
           {print}
           ' "$actual_path/install_easy.sh" > "$actual_path/install_easy.sh.tmp" &&
           mv "$actual_path/install_easy.sh.tmp" "$actual_path/install_easy.sh"
+        fi
+
+        # === rdx-zapret2 PATCh для uninstall_easy.sh ===
+        print_info "Применение патча rdx-zapret2 к uninstall_easy.sh..."
+        if [ -f "$actual_path/uninstall_easy.sh" ]; then
+          # Комментируем remove_extra_pkgs_openwrt
+          sed -i 's/^.*remove_extra_pkgs_openwrt/#&/' "$actual_path/uninstall_easy.sh" 2>/dev/null &&
+          print_success "Патч rdx-zapret2 применён к uninstall_easy.sh (remove_extra_pkgs_openwrt закомментирована)"
         fi
       fi
 
