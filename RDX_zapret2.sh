@@ -438,11 +438,6 @@ install_zapret_core() {
 
       download_my_files "$actual_path"
 
-      print_info "Установка прав доступа..."
-      chmod -R 755 "$actual_path" 2>/dev/null
-      find "$actual_path" -name "*.sh" -exec chmod +x {} \; 2>/dev/null
-      print_success "Права установлены"
-
       if [ "$TEST_MODE" = "false" ]; then
         print_info "Замена путей /opt/ -> /data/ в файлах zapret2..."
         find "$INSTALL_PATH" -type f -exec sed -i 's|/opt/|/data/|g' {} \; 2>/dev/null
@@ -461,24 +456,28 @@ install_zapret_core() {
           found && /ask_config_offload/ {print "# " $0; found=0; next}
           {print}
           ' "$actual_path/install_easy.sh" > "$actual_path/install_easy.sh.tmp" &&
-          mv "$actual_path/install_easy.sh.tmp" "$actual_path/install_easy.sh" &&
-          print_success "Патч rdx-zapret2 применён: интерактивные функции закомментированы"
+          mv "$actual_path/install_easy.sh.tmp" "$actual_path/install_easy.sh"
         fi
       fi
+
+      print_info "Установка прав доступа..."
+      chmod -R 755 "$actual_path" 2>/dev/null
+      find "$actual_path" -name "*.sh" -exec chmod +x {} \; 2>/dev/null
+      print_success "Права установлены"
 
       if [ "$TEST_MODE" = "true" ]; then
         print_info "Тестовый режим: zapret2 не запускается, изменения ограничены $actual_path"
       else
         if [ -f "$actual_path/install_easy.sh" ]; then
           print_info "Запуск install_easy.sh..."
-          "$actual_path/install_easy.sh"
+          sh "$actual_path/install_easy.sh"
         else
           print_error "install_easy.sh не найден"
         fi
 
         if [ -f "$actual_path/install_patch.sh" ]; then
           print_info "Запуск install_patch.sh..."
-          "$actual_path/install_patch.sh"
+          sh "$actual_path/install_patch.sh"
         else
           print_error "install_patch.sh не найден"
         fi
