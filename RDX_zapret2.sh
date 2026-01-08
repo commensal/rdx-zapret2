@@ -56,7 +56,7 @@ print_header() {
   echo ""
   echo -e "${CYAN}╔══════════════════════════════════════════╗${NC}"
   echo -e "${CYAN}║ rdX Zapret2 Installer                    ║${NC}"
-  echo -e "${CYAN}║ for Rooted Dumb Xiaomi routers          ║${NC}"
+  echo -e "${CYAN}║ for Rooted Dumb Xiaomi routers           ║${NC}"
   echo -e "${CYAN}╚══════════════════════════════════════════╝${NC}"
   echo ""
 }
