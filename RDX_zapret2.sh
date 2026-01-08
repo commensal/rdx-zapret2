@@ -447,21 +447,23 @@ install_zapret_core() {
         print_info "Замена путей /opt/ -> /data/ в файлах zapret2..."
         find "$INSTALL_PATH" -type f -exec sed -i 's|/opt/|/data/|g' {} \; 2>/dev/null
 
-        # === rdx-zapret2 AUTO-CONFIG для OpenWRT ===
-        print_info "Настройка автоматической конфигурации OpenWRT..."
-        cat >> "$actual_path/config" << 'EOF'
-
-# Авто-конфигурация rdx-zapret2 OpenWRT
-MODE_FILTER="hostlist"
-GETLIST="get_user.sh"
-NFQWS2_ENABLE="1"
-FLOWOFFLOAD="none"
-TMPDIR=""
-MODE_IPV6=""
-FWTYPE="iptables"
-EOF
-        
-        print_success "Авто-конфиг добавлен в $actual_path/config"
+        # === rdx-zapret2 PATCh для install_easy.sh ===
+        print_info "Применение патча rdx-zapret2 к install_easy.sh..."
+        if [ -f "$actual_path/install_easy.sh" ]; then
+          # Находим install_openwrt() и комментируем следующие 6 строк
+          awk '
+          /install_openwrt\(\)/ {found=1; print; next}
+          found && /select_fwtype/ {print "# " $0; next}
+          found && /select_ipv6/ {print "# " $0; next}
+          found && /check_prerequisites_openwrt/ {print "# " $0; next}
+          found && /ask_config/ {print "# " $0; next}
+          found && /ask_config_tmpdir/ {print "# " $0; next}
+          found && /ask_config_offload/ {print "# " $0; found=0; next}
+          {print}
+          ' "$actual_path/install_easy.sh" > "$actual_path/install_easy.sh.tmp" &&
+          mv "$actual_path/install_easy.sh.tmp" "$actual_path/install_easy.sh" &&
+          print_success "Патч rdx-zapret2 применён: интерактивные функции закомментированы"
+        fi
       fi
 
       if [ "$TEST_MODE" = "true" ]; then
@@ -493,7 +495,6 @@ EOF
     print_error "Ошибка при скачивании архива Zapret2"
   fi
 }
-
 
 install_zapret() {
   local force_reinstall="$1"
