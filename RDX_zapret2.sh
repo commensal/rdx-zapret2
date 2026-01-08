@@ -447,6 +447,15 @@ install_zapret_core() {
         print_info "Замена путей /opt/ -> /data/ в файлах zapret2..."
         find "$INSTALL_PATH" -type f -exec sed -i 's|/opt/|/data/|g' {} \; 2>/dev/null
 
+        # Отключаем вопрос о типе файрвола в install_easy.sh
+        print_info "Отключение интерактивного выбора файрвола..."
+        if [ -f "$actual_path/install_easy.sh" ]; then
+          sed -i '/select firewall type/i\
+FWTYPE="iptables"
+echo "FWTYPE установлен: iptables (авто)"' "$actual_path/install_easy.sh" 2>/dev/null || true
+          print_success "install_easy.sh модифицирован (FWTYPE=iptables по умолчанию)"
+        fi
+
         # === rdx-zapret2 AUTO-CONFIG для OpenWRT ===
         print_info "Настройка автоматической конфигурации OpenWRT..."
         cat >> "$actual_path/config" << 'EOF'
