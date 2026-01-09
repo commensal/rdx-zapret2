@@ -11,7 +11,7 @@
 |--------|-----------|
 | [Xiaomi Router BE3600 2.5G](https://4pda.to/forum/index.php?showtopic=1082660) | [BE3600](https://4pda.to/forum/index.php?showtopic=1082660)  |
 | [Xiaomi Router BE3600 Pro](https://4pda.to/forum/index.php?showtopic=1096055) | [BE3600 Pro](https://4pda.to/forum/index.php?showtopic=1096055)  |
-| [Xiaomi Router BE5000 2.5G](https://4pda.to/forum/index.php?showtopic=1088946) | [BE5000](https://4pda.to/forum/index.php?showtopic=1088946) |
+| [Xiaomi Router BE6500 Wi-Fi 7](https://4pda.to/forum/index.php?showtopic=1092730) | [BE6500](https://4pda.to/forum/index.php?showtopic=1092730) |
 
 Возможно и какие-то другие на аналогичной платформе
 
